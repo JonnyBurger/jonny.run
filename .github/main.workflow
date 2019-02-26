@@ -1,16 +1,15 @@
-workflow "New workflow" {
+workflow "Install and Test" {
   on = "push"
-  resolves = ["GitHub Action for npm"]
+  resolves = ["Test"]
 }
 
-action "GitHub Action for npm-1" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  runs = "install"
+action "Build" {
+  uses = "JonnyBurger/actions-yarn@master"
+  args = "install"
 }
 
-action "GitHub Action for npm" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  needs = ["GitHub Action for npm-1"]
-  runs = "run"
-  args = "deploy"
+action "Test" {
+  needs = "Build"
+  uses = "JonnyBurger/actions-yarn@master"
+  args = ["run", "deploy"]
 }
