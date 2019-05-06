@@ -6,6 +6,7 @@ import StravaIcon from './strava-brands.svg';
 import treadmill from './treadmill.svg';
 import bandaid from './band-aid-solid.svg';
 import thermometer from './thermometer.svg';
+import infoCircle from './info-circle-regular.svg';
 import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
 import Tooltip from './Tooltip';
 
@@ -126,6 +127,7 @@ const getTime = run => {
 
 class SingleRun extends React.Component {
 	render() {
+		const time = this.props.run.date ? getTime(this.props.run) : null;
 		return (
 			<Row>
 				<DateColumn>
@@ -136,8 +138,26 @@ class SingleRun extends React.Component {
 				</DateColumn>
 				<Day>
 					{this.props.run.date
-						? format(getTime(this.props.run), 'h:mmaaaa').replace(/\./g, '')
+						? format(time, 'h:mmaaaa').replace(/\./g, '')
 						: null}
+					{this.props.run.date &&
+					time.getHours() >= 0 &&
+					time.getHours() < 2 ? (
+						<Tooltip
+							content={
+								<div style={{width: 150}}>
+									<strong>Run after midnight</strong>
+									<br /> According to my rules every day starts and ends at 2am.
+								</div>
+							}
+						>
+							<img
+								src={infoCircle}
+								alt="Info Tooltip"
+								style={{height: 14, width: 14, marginLeft: 6}}
+							/>
+						</Tooltip>
+					) : null}
 				</Day>
 				<Time>{this.props.run.day}</Time>
 				<Distance>
