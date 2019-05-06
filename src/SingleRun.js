@@ -5,6 +5,7 @@ import addDays from 'date-fns/addDays';
 import StravaIcon from './strava-brands.svg';
 import treadmill from './treadmill.svg';
 import bandaid from './band-aid-solid.svg';
+import thermometer from './thermometer.svg';
 import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
 
 const Row = styled.div`
@@ -69,6 +70,14 @@ const InjuryIcon = () => (
 	/>
 );
 
+const SickIcon = () => (
+	<img
+		style={{width: 20, height: 20, marginTop: 6}}
+		src={thermometer}
+		alt="Sick"
+	/>
+);
+
 export const Header = () => {
 	return (
 		<Row style={{background: 'white'}}>
@@ -82,9 +91,12 @@ export const Header = () => {
 			<Treadmill>
 				<TreadmillIcon />
 			</Treadmill>
-			<Treadmill>
+			<Injury>
 				<InjuryIcon />
-			</Treadmill>
+			</Injury>
+			<Injury>
+				<SickIcon />
+			</Injury>
 		</Row>
 	);
 };
@@ -150,6 +162,7 @@ class SingleRun extends React.Component {
 					{this.props.run.treadmill ? <TreadmillIcon /> : null}
 				</Treadmill>
 				<Injury>{this.props.run.injured ? <InjuryIcon /> : null}</Injury>
+				<Injury>{this.props.run.sick ? <SickIcon /> : null}</Injury>
 			</Row>
 		);
 	}
