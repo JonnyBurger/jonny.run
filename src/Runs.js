@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {StickyContainer, Sticky} from 'react-sticky';
 import Run, {Header} from './SingleRun';
 
 const Container = styled.div`
@@ -33,13 +34,21 @@ class Runs extends React.Component {
 			return 'Loading...';
 		}
 		return (
-			<Container>
-				<Header />
-				{this.state.data.map(r => {
-					return <Run key={r.day} run={r} />;
-				})}
-				<div style={{height: 30}} />
-			</Container>
+			<StickyContainer>
+				<Container>
+					<Sticky>
+						{({style}) => (
+							<div style={style}>
+								<Header />
+							</div>
+						)}
+					</Sticky>
+					{this.state.data.map(r => {
+						return <Run key={r.day} run={r} />;
+					})}
+					<div style={{height: 30}} />
+				</Container>
+			</StickyContainer>
 		);
 	}
 }

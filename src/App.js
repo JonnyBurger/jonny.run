@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const AppHeader = styled.div`
 	background-color: white;
-	min-height: 50vh;
+	min-height: 500px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

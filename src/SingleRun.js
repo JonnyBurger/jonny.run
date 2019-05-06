@@ -58,7 +58,7 @@ const TreadmillIcon = () => (
 
 export const Header = () => {
 	return (
-		<Row>
+		<Row style={{background: 'white'}}>
 			<DateColumn>Date</DateColumn>
 			<Day>Time</Day>
 			<Time>Day</Time>

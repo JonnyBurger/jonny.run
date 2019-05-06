@@ -7,6 +7,7 @@
     "ordinal": "^1.0.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-sticky": "^6.0.3",
     "styled-components": "^4.1.3"
   },
   "homepage": "https://www.jonny.run",
