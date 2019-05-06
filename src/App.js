@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ordinal from 'ordinal';
 import {differenceInCalendarDays} from 'date-fns';
 import Runs from './Runs';
+import Faq from './Faq';
 
 const Container = styled.div`
 	text-align: center;
@@ -10,7 +11,8 @@ const Container = styled.div`
 
 const AppHeader = styled.div`
 	background-color: white;
-	min-height: 500px;
+	padding-top: 200px;
+	padding-bottom: 100px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -32,6 +34,54 @@ const Counter = styled.div`
 
 const dayOne = new Date('2016-02-19');
 
+const Button = styled.div`
+	cursor: pointer;
+	font-weight: bold;
+	padding: 10px 40px;
+	border: 1px solid black;
+	font-family: 'Roboto Condensed';
+	color: #333;
+	&:hover {
+		background: #333;
+		color: white;
+	}
+	text-decoration: none;
+`;
+
+class HeaderButtons extends Component {
+	state = {
+		faq: false
+	};
+
+	render() {
+		return (
+			<>
+				<div style={{flexDirection: 'row', display: 'flex'}}>
+					<a
+						style={{textDecoration: 'none'}}
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://www.youtube.com/watch?v=Yb7ZIl3Qaes"
+					>
+						<Button>Watch the video</Button>
+					</a>
+					<div style={{width: 10}} />
+					<Button
+						onClick={() => {
+							this.setState(prevState => ({
+								faq: !prevState.faq
+							}));
+						}}
+					>
+						FAQ
+					</Button>
+				</div>
+				{this.state.faq ? <Faq /> : null}
+			</>
+		);
+	}
+}
+
 class App extends Component {
 	render() {
 		return (
@@ -42,6 +92,8 @@ class App extends Component {
 						Today is the{' '}
 						{ordinal(differenceInCalendarDays(new Date(), dayOne) + 1)} day
 					</Counter>
+					<div style={{height: 20}} />
+					<HeaderButtons />
 				</AppHeader>
 				<Runs />
 			</Container>
