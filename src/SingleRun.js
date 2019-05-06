@@ -4,7 +4,8 @@ import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 import StravaIcon from './strava-brands.svg';
 import treadmill from './treadmill.svg';
-import {LOS_ANGELES, LONDON, SOFIA} from './timezones';
+import bandaid from './band-aid-solid.svg';
+import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
 
 const Row = styled.div`
 	display: flex;
@@ -43,9 +44,13 @@ const StravaLink = styled.div`
 `;
 
 const Treadmill = styled.div`
-	flex: 1;
+	width: 30px;
 	justify-content: center;
 	align-items: center;
+`;
+
+const Injury = styled.div`
+	width: 30px;
 `;
 
 const TreadmillIcon = () => (
@@ -53,6 +58,14 @@ const TreadmillIcon = () => (
 		style={{width: 24, height: 24, marginTop: 6}}
 		src={treadmill}
 		alt="Treadmill"
+	/>
+);
+
+const InjuryIcon = () => (
+	<img
+		style={{width: 20, height: 20, marginTop: 6}}
+		src={bandaid}
+		alt="Injury"
 	/>
 );
 
@@ -69,6 +82,9 @@ export const Header = () => {
 			<Treadmill>
 				<TreadmillIcon />
 			</Treadmill>
+			<Treadmill>
+				<InjuryIcon />
+			</Treadmill>
 		</Row>
 	);
 };
@@ -84,7 +100,7 @@ const getTime = run => {
 		return new Date(new Date(run.date).getTime() + SOFIA);
 	}
 	if (run.country === 'Portugal') {
-		return new Date(new Date(run.date).getTime() + SOFIA);
+		return new Date(new Date(run.date).getTime() + LISBOA);
 	}
 	return new Date(run.date);
 };
@@ -102,7 +118,7 @@ class SingleRun extends React.Component {
 				<Day>
 					{this.props.run.date
 						? format(getTime(this.props.run), 'h:mmaaaa').replace(/\./g, '')
-						: '-'}
+						: null}
 				</Day>
 				<Time>{this.props.run.day}</Time>
 				<Distance>
@@ -133,6 +149,7 @@ class SingleRun extends React.Component {
 				<Treadmill>
 					{this.props.run.treadmill ? <TreadmillIcon /> : null}
 				</Treadmill>
+				<Injury>{this.props.run.injured ? <InjuryIcon /> : null}</Injury>
 			</Row>
 		);
 	}
