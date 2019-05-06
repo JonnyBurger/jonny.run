@@ -12,7 +12,11 @@ class Runs extends React.Component {
 		loading: true
 	};
 	componentDidMount() {
-		fetch('https://api.jonny.run/.netlify/functions/index')
+		fetch(
+			process.env.NODE_ENV === 'production'
+				? 'https://api.jonny.run/.netlify/functions/index'
+				: 'http://localhost:1200'
+		)
 			.then(response => response.json())
 			.then(response => {
 				this.setState({
@@ -32,7 +36,7 @@ class Runs extends React.Component {
 			<Container>
 				<Header />
 				{this.state.data.map(r => {
-					return <Run run={r} />;
+					return <Run key={r.day} run={r} />;
 				})}
 				<div style={{height: 30}} />
 			</Container>

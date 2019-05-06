@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import {format} from 'date-fns';
+import format from 'date-fns/format';
+import addDays from 'date-fns/addDays';
 import StravaIcon from './strava-brands.svg';
+import treadmill from './treadmill.svg';
+import {LOS_ANGELES, LONDON, SOFIA} from './timezones';
 
 const Row = styled.div`
 	display: flex;
@@ -14,6 +17,10 @@ const Row = styled.div`
 `;
 
 const Day = styled.div`
+	flex: 1;
+`;
+
+const Time = styled.div`
 	flex: 1;
 `;
 
@@ -35,17 +42,51 @@ const StravaLink = styled.div`
 	flex: 1;
 `;
 
+const Treadmill = styled.div`
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+`;
+
+const TreadmillIcon = () => (
+	<img
+		style={{width: 24, height: 24, marginTop: 6}}
+		src={treadmill}
+		alt="Treadmill"
+	/>
+);
+
 export const Header = () => {
 	return (
 		<Row>
 			<DateColumn>Date</DateColumn>
-			<Day>Day</Day>
+			<Day>Time</Day>
+			<Time>Day</Time>
 			<Distance>Distance</Distance>
 			<City>City</City>
 			<Country>Country</Country>
 			<StravaLink>Strava</StravaLink>
+			<Treadmill>
+				<TreadmillIcon />
+			</Treadmill>
 		</Row>
 	);
+};
+
+const getTime = run => {
+	if (run.country === 'United States') {
+		return new Date(new Date(run.date).getTime() + LOS_ANGELES);
+	}
+	if (run.country === 'United Kingdom') {
+		return new Date(new Date(run.date).getTime() + LONDON);
+	}
+	if (run.country === 'Bulgaria') {
+		return new Date(new Date(run.date).getTime() + SOFIA);
+	}
+	if (run.country === 'Portugal') {
+		return new Date(new Date(run.date).getTime() + SOFIA);
+	}
+	return new Date(run.date);
 };
 
 class SingleRun extends React.Component {
@@ -53,11 +94,17 @@ class SingleRun extends React.Component {
 		return (
 			<Row>
 				<DateColumn>
-					{this.props.run.date
-						? format(new Date(this.props.run.date), 'dd.MM.YYY')
-						: '?'}
+					{format(
+						new Date(addDays(new Date('2016-02-18'), this.props.run.day)),
+						'dd.MM.YYY'
+					)}
 				</DateColumn>
-				<Day>{this.props.run.day}</Day>
+				<Day>
+					{this.props.run.date
+						? format(getTime(this.props.run), 'h:mmaaaa').replace(/\./g, '')
+						: '-'}
+				</Day>
+				<Time>{this.props.run.day}</Time>
 				<Distance>
 					{this.props.run.distance
 						? (this.props.run.distance / 1000).toFixed(1) + 'km'
@@ -83,6 +130,9 @@ class SingleRun extends React.Component {
 						</a>
 					) : null}
 				</StravaLink>
+				<Treadmill>
+					{this.props.run.treadmill ? <TreadmillIcon /> : null}
+				</Treadmill>
 			</Row>
 		);
 	}
