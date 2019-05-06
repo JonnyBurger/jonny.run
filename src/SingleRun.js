@@ -53,10 +53,16 @@ class SingleRun extends React.Component {
 		return (
 			<Row>
 				<DateColumn>
-					{format(new Date(this.props.run.date), 'dd.MM.YYY')}
+					{this.props.run.date
+						? format(new Date(this.props.run.date), 'dd.MM.YYY')
+						: '?'}
 				</DateColumn>
 				<Day>{this.props.run.day}</Day>
-				<Distance>{(this.props.run.distance / 1000).toFixed(1)}km</Distance>
+				<Distance>
+					{this.props.run.distance
+						? (this.props.run.distance / 1000).toFixed(1) + 'km'
+						: '?'}
+				</Distance>
 				<City>{this.props.run.city}</City>
 				<Country>{this.props.run.country}</Country>
 				<StravaLink>
