@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import ordinal from 'ordinal';
 import {differenceInCalendarDays} from 'date-fns';
+import Runs from './Runs';
 
 const Container = styled.div`
 	text-align: center;
@@ -9,7 +10,7 @@ const Container = styled.div`
 
 const AppHeader = styled.div`
 	background-color: white;
-	min-height: 100vh;
+	min-height: 50vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -42,6 +43,7 @@ class App extends Component {
 						{ordinal(differenceInCalendarDays(new Date(), dayOne) + 1)} day
 					</Counter>
 				</AppHeader>
+				<Runs />
 			</Container>
 		);
 	}
