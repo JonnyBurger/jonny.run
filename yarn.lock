@@ -8119,6 +8119,13 @@ react-scripts@2.1.5:
   optionalDependencies:
     fsevents "1.2.4"
 
+react-simple-tooltip@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-simple-tooltip/-/react-simple-tooltip-2.5.0.tgz#299d41a5e23349832e28eb01597e8b974fb73ba6"
+  integrity sha512-ig0i2rNF4KTfL9q4HZiin3BPcdPAM3zoLZZjTauSGhKsFP3pzGK2gwxbqgmIcjQSCDKlCThiCfvDDjhbTDgUvQ==
+  dependencies:
+    styled-components "^4.1.3"
+
 react-sticky@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/react-sticky/-/react-sticky-6.0.3.tgz#7a18b643e1863da113d7f7036118d2a75d9ecde4"

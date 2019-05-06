@@ -37,8 +37,8 @@ class Runs extends React.Component {
 			<StickyContainer>
 				<Container>
 					<Sticky>
-						{({style}) => (
-							<div style={style}>
+						{({style, isSticky}) => (
+							<div style={{...style, ...(isSticky ? {zIndex: 2} : {})}}>
 								<Header />
 							</div>
 						)}

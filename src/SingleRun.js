@@ -7,6 +7,7 @@ import treadmill from './treadmill.svg';
 import bandaid from './band-aid-solid.svg';
 import thermometer from './thermometer.svg';
 import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
+import Tooltip from './Tooltip';
 
 const Row = styled.div`
 	display: flex;
@@ -87,15 +88,21 @@ export const Header = () => {
 			<Distance>Distance</Distance>
 			<City>City</City>
 			<Country>Country</Country>
-			<StravaLink>Strava</StravaLink>
+			<StravaLink>Run</StravaLink>
 			<Treadmill>
-				<TreadmillIcon />
+				<Tooltip content="Treadmill">
+					<TreadmillIcon />
+				</Tooltip>
 			</Treadmill>
 			<Injury>
-				<InjuryIcon />
+				<Tooltip content="Injury">
+					<InjuryIcon />
+				</Tooltip>
 			</Injury>
 			<Injury>
-				<SickIcon />
+				<Tooltip content="Sickness">
+					<SickIcon />
+				</Tooltip>
 			</Injury>
 		</Row>
 	);
@@ -142,27 +149,77 @@ class SingleRun extends React.Component {
 				<Country>{this.props.run.country}</Country>
 				<StravaLink>
 					{this.props.run.strava_id ? (
-						<a
-							target="_blank"
-							rel="noopener noreferrer"
-							href={`https://strava.com/activities/${this.props.run.strava_id}`}
+						<Tooltip
+							content={
+								<div style={{width: 110, textAlign: 'center'}}>
+									See Run on Strava
+								</div>
+							}
+							placement="top"
 						>
-							<img
-								style={{
-									height: 24,
-									width: 24
-								}}
-								src={StravaIcon}
-								alt="Strava activity"
-							/>
-						</a>
+							<a
+								target="_blank"
+								rel="noopener noreferrer"
+								href={`https://strava.com/activities/${
+									this.props.run.strava_id
+								}`}
+							>
+								<img
+									style={{
+										height: 24,
+										width: 24,
+										marginTop: 3
+									}}
+									src={StravaIcon}
+									alt="Strava activity"
+								/>
+							</a>
+						</Tooltip>
 					) : null}
 				</StravaLink>
 				<Treadmill>
-					{this.props.run.treadmill ? <TreadmillIcon /> : null}
+					{this.props.run.treadmill ? (
+						<Tooltip
+							content={
+								<div style={{whiteSpace: 'nowrap'}}>
+									{this.props.run.treadmill}
+								</div>
+							}
+						>
+							<TreadmillIcon />
+						</Tooltip>
+					) : null}
 				</Treadmill>
-				<Injury>{this.props.run.injured ? <InjuryIcon /> : null}</Injury>
-				<Injury>{this.props.run.sick ? <SickIcon /> : null}</Injury>
+				<Injury>
+					{this.props.run.injured ? (
+						<Tooltip
+							content={
+								<div style={{width: 200}}>
+									<strong>Injury:</strong>
+									<br />
+									{this.props.run.injured}
+								</div>
+							}
+						>
+							<InjuryIcon />
+						</Tooltip>
+					) : null}
+				</Injury>
+				<Injury>
+					{this.props.run.sick ? (
+						<Tooltip
+							content={
+								<div style={{width: 200}}>
+									<strong>Sickness:</strong>
+									<br />
+									{this.props.run.sick}
+								</div>
+							}
+						>
+							<SickIcon />
+						</Tooltip>
+					) : null}
+				</Injury>
 			</Row>
 		);
 	}
