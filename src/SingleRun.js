@@ -6,9 +6,11 @@ import StravaIcon from './strava-brands.svg';
 import treadmill from './treadmill.svg';
 import bandaid from './band-aid-solid.svg';
 import thermometer from './thermometer.svg';
+import drink from './glass-solid.svg';
 import infoCircle from './info-circle-regular.svg';
 import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
 import Tooltip from './Tooltip';
+import getFlag from './get-flag';
 
 const Row = styled.div`
 	display: flex;
@@ -38,9 +40,8 @@ const Distance = styled.div`
 
 const City = styled.div`
 	flex: 2;
-`;
-const Country = styled.div`
-	flex: 2;
+	display: flex;
+	align-items: center;
 `;
 const StravaLink = styled.div`
 	flex: 1;
@@ -56,9 +57,13 @@ const Injury = styled.div`
 	width: 30px;
 `;
 
+const Drunk = styled.div`
+	width: 30px;
+`;
+
 const TreadmillIcon = () => (
 	<img
-		style={{width: 24, height: 24, marginTop: 6}}
+		style={{width: 24, height: 24, marginTop: 8}}
 		src={treadmill}
 		alt="Treadmill"
 	/>
@@ -80,6 +85,10 @@ const SickIcon = () => (
 	/>
 );
 
+const DrunkIcon = () => (
+	<img style={{width: 16, height: 16, marginTop: 6}} src={drink} alt="Drunk" />
+);
+
 export const Header = () => {
 	return (
 		<Row style={{background: 'white'}}>
@@ -88,7 +97,6 @@ export const Header = () => {
 			<Time>Day</Time>
 			<Distance>Distance</Distance>
 			<City>City</City>
-			<Country>Country</Country>
 			<StravaLink>Run</StravaLink>
 			<Treadmill>
 				<Tooltip content="Treadmill">
@@ -105,6 +113,11 @@ export const Header = () => {
 					<SickIcon />
 				</Tooltip>
 			</Injury>
+			<Drunk>
+				<Tooltip content="Drunk">
+					<DrunkIcon />
+				</Tooltip>
+			</Drunk>
 		</Row>
 	);
 };
@@ -165,8 +178,16 @@ class SingleRun extends React.Component {
 						? (this.props.run.distance / 1000).toFixed(1) + 'km'
 						: '?'}
 				</Distance>
-				<City>{this.props.run.city}</City>
-				<Country>{this.props.run.country}</Country>
+				<City>
+					<Tooltip content={this.props.run.country}>
+						<img
+							src={getFlag(this.props.run.country)}
+							style={{height: 20, marginRight: 5}}
+							alt={this.props.run.country}
+						/>{' '}
+					</Tooltip>
+					{this.props.run.city}
+				</City>
 				<StravaLink>
 					{this.props.run.strava_id ? (
 						<Tooltip
@@ -231,8 +252,7 @@ class SingleRun extends React.Component {
 							content={
 								<div style={{width: 200}}>
 									<strong>Sickness:</strong>
-									<br />
-									{this.props.run.sick}
+									<br />"{this.props.run.sick}"
 								</div>
 							}
 						>
@@ -240,6 +260,20 @@ class SingleRun extends React.Component {
 						</Tooltip>
 					) : null}
 				</Injury>
+				<Drunk>
+					{this.props.run.drunk ? (
+						<Tooltip
+							content={
+								<div style={{width: 200}}>
+									<strong>Alcohol Intake:</strong>
+									<br />"{this.props.run.drunk}"
+								</div>
+							}
+						>
+							<DrunkIcon />
+						</Tooltip>
+					) : null}
+				</Drunk>
 			</Row>
 		);
 	}

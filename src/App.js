@@ -4,6 +4,7 @@ import ordinal from 'ordinal';
 import {differenceInCalendarDays} from 'date-fns';
 import Runs from './Runs';
 import Faq from './Faq';
+import getDay from './get-day';
 
 const Container = styled.div`
 	text-align: center;
@@ -75,6 +76,15 @@ class HeaderButtons extends Component {
 					>
 						FAQ
 					</Button>
+					<div style={{width: 10}} />
+					<a
+						style={{textDecoration: 'none'}}
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://twitter.com/JNYBGR"
+					>
+						<Button>@JNYBGR</Button>
+					</a>
 				</div>
 				{this.state.faq ? <Faq /> : null}
 			</>
@@ -88,10 +98,7 @@ class App extends Component {
 			<Container>
 				<AppHeader>
 					<Title>RUN EVERY DAY</Title>
-					<Counter>
-						Today is the{' '}
-						{ordinal(differenceInCalendarDays(new Date(), dayOne) + 1)} day
-					</Counter>
+					<Counter>Today is the {ordinal(getDay(new Date()))} day</Counter>
 					<div style={{height: 20}} />
 					<HeaderButtons />
 				</AppHeader>

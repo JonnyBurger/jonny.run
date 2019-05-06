@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import uniqBy from 'lodash.uniqby';
 import {StickyContainer, Sticky} from 'react-sticky';
 import Run, {Header} from './SingleRun';
+import Facts from './Facts';
 
 const Container = styled.div`
 	max-width: 900px;
@@ -36,6 +38,8 @@ class Runs extends React.Component {
 		return (
 			<StickyContainer>
 				<Container>
+					<Facts runs={this.state.data} />
+					<div style={{height: 80}} />
 					<Sticky>
 						{({style, isSticky}) => (
 							<div style={{...style, ...(isSticky ? {zIndex: 2} : {})}}>
