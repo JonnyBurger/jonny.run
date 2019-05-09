@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import uniqBy from 'lodash.uniqby';
-import getDay from './get-day';
 
 const Container = styled.div`
 	flex-direction: row;
@@ -28,23 +26,47 @@ const Num = styled.div`
 	font-weight: bold;
 `;
 
-export default ({runs}) => (
-	<Container>
-		<Fact>
-			<Title>Days</Title>
-			<Num>{runs.length}</Num>
-		</Fact>
-		<Fact>
-			<Title>Did run today yet</Title>
-			<Num>{runs.length === getDay(new Date()) ? 'Yes' : 'No'}</Num>
-		</Fact>
-		<Fact>
-			<Title>World Record progress</Title>
-			<Num>{((runs.length / 19032) * 100).toFixed(2)}%</Num>
-		</Fact>
-		<Fact>
-			<Title>Countries</Title>
-			<Num>{uniqBy(runs.filter(r => r.country), r => r.country).length}</Num>
-		</Fact>
-	</Container>
-);
+const getCountries = () =>
+	fetch(
+		process.env.NODE_ENV === 'production'
+			? `https://api.jonny.run/.netlify/functions/index/countries`
+			: `http://localhost:1200/countries`
+	).then(response => response.json());
+
+export default class extends React.Component {
+	state = {
+		countries: null
+	};
+	componentDidMount() {
+		getCountries().then(data => {
+			this.setState({
+				countries: data.countries
+			});
+		});
+	}
+	render() {
+		const {total, runs} = this.props;
+		return (
+			<Container>
+				<Fact>
+					<Title>Days</Title>
+					<Num>{total}</Num>
+				</Fact>
+				<Fact>
+					<Title>Did run today yet</Title>
+					<Num>{runs[0].distance ? 'Yes' : 'No'}</Num>
+				</Fact>
+				<Fact>
+					<Title>World Record progress</Title>
+					<Num>{((total / 19032) * 100).toFixed(2)}%</Num>
+				</Fact>
+				<Fact>
+					<Title>Countries</Title>
+					<Num>
+						{this.state.countries ? this.state.countries.length : '...'}
+					</Num>
+				</Fact>
+			</Container>
+		);
+	}
+}
