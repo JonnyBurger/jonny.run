@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import ordinal from 'ordinal';
-import {differenceInCalendarDays} from 'date-fns';
 import Runs from './Runs';
 import Faq from './Faq';
 import getDay from './get-day';
@@ -32,8 +31,6 @@ const Counter = styled.div`
 	font-weight: bold;
 	font-family: 'Roboto Condensed';
 `;
-
-const dayOne = new Date('2016-02-19');
 
 const Button = styled.div`
 	cursor: pointer;

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import uniqBy from 'lodash.uniqby';
 import {StickyContainer, Sticky} from 'react-sticky';
 import Run, {Header} from './SingleRun';
 import Facts from './Facts';
