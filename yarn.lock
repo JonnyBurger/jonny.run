@@ -4219,6 +4219,11 @@ get-stream@^4.0.0:
   dependencies:
     pump "^3.0.0"
 
+get-timezone-offset@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/get-timezone-offset/-/get-timezone-offset-1.0.3.tgz#dc6647421eddab66f65513d2f78c4d3eee51be08"
+  integrity sha1-3GZHQh7dq2b2VRPS94xNPu5Rvgg=
+
 get-value@^2.0.3, get-value@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"

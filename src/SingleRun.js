@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
+import getTimezoneOffset from 'get-timezone-offset';
 import StravaIcon from './strava-brands.svg';
 import treadmill from './treadmill.svg';
 import bandaid from './band-aid-solid.svg';
@@ -123,24 +124,42 @@ export const Header = () => {
 };
 
 const getTime = run => {
+	/*
 	if (run.country === 'United States') {
-		return new Date(new Date(run.date).getTime() + LOS_ANGELES);
+		return new Date(
+			// Intentional Zurich
+			new Date(run.date).getTime() +
+				getTimezoneOffset('Europe/Zurich', new Date(run.date)) * 1000 * 60
+		);
 	}
 	if (run.country === 'United Kingdom') {
-		return new Date(new Date(run.date).getTime() + LONDON);
+		return new Date(
+			new Date(run.date).getTime() +
+				getTimezoneOffset('Europe/London', new Date(run.date)) * 1000 * 60
+		);
 	}
 	if (run.country === 'Bulgaria') {
-		return new Date(new Date(run.date).getTime() + SOFIA);
+		return new Date(
+			new Date(run.date).getTime() +
+				getTimezoneOffset('Europe/Sofia', new Date(run.date)) * 1000 * 60
+		);
 	}
 	if (run.country === 'Portugal') {
-		return new Date(new Date(run.date).getTime() + LISBOA);
-	}
-	return new Date(run.date);
+		return new Date(
+			new Date(run.date).getTime() +
+				getTimezoneOffset('Europe/Lisbon', new Date(run.date)) * 1000 * 60
+		);
+	}*/
+	return new Date(
+		new Date(run.date).getTime() +
+			getTimezoneOffset('Europe/Zurich', new Date(run.date)) * 1000 * 60
+	);
 };
 
 class SingleRun extends React.Component {
 	render() {
 		const time = this.props.run.date ? getTime(this.props.run) : null;
+		console.log(time);
 		return (
 			<Row>
 				<DateColumn>
