@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {FixedSizeList} from 'react-window';
+import {useMedia} from 'react-use-media';
 import InfiniteLoader from 'react-window-infinite-loader';
-import {StickyContainer, Sticky} from 'react-sticky';
 import Run from './SingleRun';
 import Facts from './Facts';
 
@@ -18,68 +18,65 @@ const getRuns = (offset: number = 0) =>
 			: `http://localhost:1200?offset=${offset}`
 	).then(response => response.json());
 
-class Runs extends React.Component {
-	state = {
-		loading: true
-	};
-	componentDidMount() {
+const Runs = ({width, height}) => {
+	const [loading, setLoading] = useState(true);
+	const [data, setData] = useState(null);
+	const [total, setTotal] = useState(null);
+	const isMobile = useMedia('(max-width: 800px)');
+	useEffect(() => {
 		getRuns(0)
 			.then(response => {
-				this.setState({
-					loading: false,
-					data: response.runs,
-					total: response.total
-				});
+				setLoading(false);
+				setData(response.runs);
+				setTotal(response.total);
 			})
 			.catch(err => {
 				alert(`Could not load runs: ${err.message}`);
 			});
+	}, []);
+
+	if (loading) {
+		return 'Loading...';
 	}
-	render() {
-		if (this.state.loading) {
-			return 'Loading...';
-		}
-		return (
-			<Container>
-				{/**
-				<Facts total={this.state.total} runs={this.state.data} />
-				 */}
-				<InfiniteLoader
-					itemCount={this.state.total}
-					isItemLoaded={index => Boolean(this.state.data[index])}
-					loadMoreItems={offset => {
-						return getRuns(offset).then(response => {
-							this.setState({
-								data: [...this.state.data, ...response.runs]
-							});
-						});
-					}}
-					minimumBatchSize={100}
-					threshold={40}
-				>
-					{({ref, onItemsRendered}) => (
-						<FixedSizeList
-							overscanCount={40}
-							width={this.props.width}
-							height={this.props.height}
-							itemCount={this.state.total}
-							itemSize={50}
-							onItemsRendered={onItemsRendered}
-							ref={ref}
-						>
-							{({index, style}) => (
-								<div style={style}>
-									{this.state.data[index] ? (
-										<Run run={this.state.data[index]} />
-									) : null}
-								</div>
-							)}
-						</FixedSizeList>
-					)}
-				</InfiniteLoader>
-			</Container>
-		);
-	}
-}
+
+	return (
+		<Container>
+			{/**
+		<Facts total={this.state.total} runs={this.state.data} />
+		 */}
+			<InfiniteLoader
+				itemCount={total}
+				isItemLoaded={index => Boolean(data[index])}
+				loadMoreItems={offset => {
+					return getRuns(offset).then(response => {
+						setData([...data, ...response.runs]);
+					});
+				}}
+				minimumBatchSize={100}
+				threshold={40}
+			>
+				{({ref, onItemsRendered}) => (
+					<FixedSizeList
+						overscanCount={40}
+						width={width}
+						height={height}
+						itemCount={total}
+						itemSize={isMobile ? 100 : 50}
+						onItemsRendered={onItemsRendered}
+						ref={ref}
+					>
+						{({index, style}) => (
+							<div
+								style={{...style, display: 'flex', justifyContent: 'center'}}
+							>
+								{data[index] ? <Run run={data[index]} /> : null}
+							</div>
+						)}
+					</FixedSizeList>
+				)}
+			</InfiniteLoader>
+		</Container>
+	);
+};
 
 export default Runs;

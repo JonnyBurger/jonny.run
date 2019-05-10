@@ -12,6 +12,7 @@ import infoCircle from './info-circle-regular.svg';
 // import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
 import Tooltip from './Tooltip';
 import getFlag from './get-flag';
+import {useMedia} from 'react-use-media';
 
 const Row = styled.div`
 	display: flex;
@@ -20,35 +21,63 @@ const Row = styled.div`
 	text-align: left;
 	padding-left: 30px;
 	padding-right: 30px;
-	height: 36px;
 	border-bottom: 1px solid black;
 	align-items: center;
 	justify-content: center;
+	flex: 1;
+
+	@media screen and (max-width: 800px) {
+		display: block;
+	}
 `;
 
 const Day = styled.div`
 	flex: 1;
+	@media screen and (max-width: 800px) {
+		display: inline-block;
+		margin-right: 15px;
+	}
 `;
 
 const Time = styled.div`
 	flex: 1;
+	@media screen and (max-width: 800px) {
+		display: inline-block;
+		margin-right: 15px;
+	}
 `;
 
 const DateColumn = styled.div`
 	flex: 2;
+	@media screen and (max-width: 800px) {
+		display: inline-block;
+		margin-right: 15px;
+	}
 `;
 
 const Distance = styled.div`
 	flex: 1;
+	@media screen and (max-width: 800px) {
+		display: inline-block;
+		margin-right: 15px;
+	}
 `;
 
 const City = styled.div`
 	flex: 2;
 	display: flex;
 	align-items: center;
+	@media screen and (max-width: 800px) {
+		display: inline-block;
+		margin-right: 15px;
+	}
 `;
 const StravaLink = styled.div`
 	flex: 1;
+	@media screen and (max-width: 800px) {
+		display: inline-block;
+		margin-right: 15px;
+	}
 `;
 
 const Treadmill = styled.div`
@@ -59,10 +88,16 @@ const Treadmill = styled.div`
 
 const Injury = styled.div`
 	width: 30px;
+	@media screen and (max-width: 800px) {
+		display: inline-block;
+	}
 `;
 
 const Drunk = styled.div`
 	width: 30px;
+	@media screen and (max-width: 800px) {
+		display: inline-block;
+	}
 `;
 
 const TreadmillIcon = () => (
@@ -94,8 +129,12 @@ const DrunkIcon = () => (
 );
 
 export const Header = () => {
+	const isMobile = useMedia('(max-width: 800px)');
+	if (isMobile) {
+		return null;
+	}
 	return (
-		<Row style={{background: 'white'}}>
+		<Row style={{background: 'white', flex: 0}}>
 			<DateColumn>Date</DateColumn>
 			<Day>Time</Day>
 			<Time>Day</Time>
