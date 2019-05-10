@@ -9,7 +9,7 @@ import bandaid from './band-aid-solid.svg';
 import thermometer from './thermometer.svg';
 import drink from './glass-solid.svg';
 import infoCircle from './info-circle-regular.svg';
-import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
+// import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
 import Tooltip from './Tooltip';
 import getFlag from './get-flag';
 
@@ -18,9 +18,12 @@ const Row = styled.div`
 	flex-direction: row;
 	font-family: 'Roboto Condensed';
 	text-align: left;
+	padding-left: 30px;
+	padding-right: 30px;
 	height: 36px;
 	border-bottom: 1px solid black;
 	align-items: center;
+	justify-content: center;
 `;
 
 const Day = styled.div`
@@ -159,7 +162,6 @@ const getTime = run => {
 class SingleRun extends React.Component {
 	render() {
 		const time = this.props.run.date ? getTime(this.props.run) : null;
-		console.log(time);
 		return (
 			<Row>
 				<DateColumn>

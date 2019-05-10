@@ -1,23 +1,30 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import Autosize from 'react-virtualized-auto-sizer';
 import ordinal from 'ordinal';
 import Runs from './Runs';
 import Faq from './Faq';
 import getDay from './get-day';
+import {Header} from './SingleRun';
 
 const Container = styled.div`
 	text-align: center;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
 `;
 
 const AppHeader = styled.div`
 	background-color: white;
-	padding-top: 200px;
-	padding-bottom: 100px;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 	color: black;
+	padding-left: 30px;
+	padding-right: 30px;
 `;
 
 const Title = styled.div`
@@ -95,11 +102,18 @@ class App extends Component {
 			<Container>
 				<AppHeader>
 					<Title>RUN EVERY DAY</Title>
+					<div style={{width: 40}} />
 					<Counter>Today is the {ordinal(getDay(new Date()))} day</Counter>
+					<div style={{flex: 1}} />
 					<div style={{height: 20}} />
 					<HeaderButtons />
 				</AppHeader>
-				<Runs />
+				<Header />
+				<div style={{flex: 1}}>
+					<Autosize>
+						{({height, width}) => <Runs height={height} width={width} />}
+					</Autosize>
+				</div>
 			</Container>
 		);
 	}
