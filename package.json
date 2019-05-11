@@ -13,7 +13,6 @@
     "react-simple-tooltip": "^2.5.0",
     "react-sticky": "^6.0.3",
     "react-use-media": "^0.3.0",
-    "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.1",
     "react-window-infinite-loader": "^1.0.3",
     "styled-components": "^4.1.3"

@@ -23,21 +23,30 @@ const Row = styled.div`
 	padding-right: 30px;
 	border-bottom: 1px solid black;
 	align-items: center;
+	height: 36px;
+	@media screen and (max-width: 800px) {
+		display: block;
+		padding-top: 20px;
+		height: auto;
+	}
 `;
 
 const Day = styled.div`
 	flex: 1;
 	@media screen and (max-width: 800px) {
 		display: inline-block;
-		margin-right: 15px;
 	}
 `;
 
 const Time = styled.div`
 	flex: 1;
 	@media screen and (max-width: 800px) {
-		display: inline-block;
+		display: block;
+		font-size: 1.8em;
 		margin-right: 15px;
+		&:before {
+			content: 'Day ';
+		}
 	}
 `;
 
@@ -46,6 +55,9 @@ const DateColumn = styled.div`
 	@media screen and (max-width: 800px) {
 		display: inline-block;
 		margin-right: 15px;
+		&:before {
+			content: 'Date: ';
+		}
 	}
 `;
 
@@ -54,16 +66,21 @@ const Distance = styled.div`
 	@media screen and (max-width: 800px) {
 		display: inline-block;
 		margin-right: 15px;
+		&:before {
+			content: 'Distance: ';
+		}
 	}
 `;
 
 const City = styled.div`
 	flex: 2;
 	display: flex;
-	align-items: center;
+	flex-direction: row;
 	@media screen and (max-width: 800px) {
-		display: inline-block;
 		margin-right: 15px;
+		&:before {
+			content: 'Location: ';
+		}
 	}
 `;
 const StravaLink = styled.div`
@@ -229,20 +246,25 @@ class SingleRun extends React.Component {
 						</Tooltip>
 					) : null}
 				</Day>
+				<br />
 				<Distance>
 					{this.props.run.distance
 						? (this.props.run.distance / 1000).toFixed(1) + 'km'
 						: '?'}
 				</Distance>
 				<City>
-					<Tooltip content={this.props.run.country}>
-						<img
-							src={getFlag(this.props.run.country)}
-							style={{height: 20, marginRight: 5}}
-							alt={this.props.run.country}
-						/>{' '}
-					</Tooltip>
-					{this.props.run.city}
+					{this.props.run.city ? (
+						<>
+							<Tooltip content={this.props.run.country}>
+								<img
+									src={getFlag(this.props.run.country)}
+									style={{height: 20, marginRight: 5}}
+									alt={this.props.run.country}
+								/>{' '}
+							</Tooltip>
+							{this.props.run.city}
+						</>
+					) : null}
 				</City>
 				<StravaLink>
 					{this.props.run.strava_id ? (

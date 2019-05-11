@@ -1,30 +1,29 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import Autosize from 'react-virtualized-auto-sizer';
 import ordinal from 'ordinal';
 import Runs from './Runs';
 import Faq from './Faq';
 import getDay from './get-day';
-import {Header} from './SingleRun';
 
 const Container = styled.div`
-	text-align: center;
-	height: 100%;
-	width: 100%;
-	position: absolute;
 	display: flex;
 	flex-direction: column;
 `;
 
 const AppHeader = styled.div`
 	background-color: white;
-	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 	color: black;
+	margin: auto;
 	padding-left: 30px;
 	padding-right: 30px;
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	@media screen and (max-width: 1000px) {
+		flex-direction: column;
+	}
 `;
 
 const Title = styled.div`
@@ -53,6 +52,15 @@ const Button = styled.div`
 	text-decoration: none;
 `;
 
+const ButtonContainer = styled.div`
+	flex-direction: row;
+	display: flex;
+	@media screen and (max-width: 800px) {
+		flex-direction: column;
+		text-align: center;
+	}
+`;
+
 class HeaderButtons extends Component {
 	state = {
 		faq: false
@@ -61,7 +69,9 @@ class HeaderButtons extends Component {
 	render() {
 		return (
 			<>
-				<div style={{flexDirection: 'row', display: 'flex'}}>
+				{this.state.faq ? <Faq /> : null}
+
+				<ButtonContainer>
 					<a
 						style={{textDecoration: 'none'}}
 						target="_blank"
@@ -70,7 +80,7 @@ class HeaderButtons extends Component {
 					>
 						<Button>Watch the video</Button>
 					</a>
-					<div style={{width: 10}} />
+					<div style={{width: 10, height: 10}} />
 					<Button
 						onClick={() => {
 							this.setState(prevState => ({
@@ -80,7 +90,7 @@ class HeaderButtons extends Component {
 					>
 						FAQ
 					</Button>
-					<div style={{width: 10}} />
+					<div style={{width: 10, height: 10}} />
 					<a
 						style={{textDecoration: 'none'}}
 						target="_blank"
@@ -89,8 +99,7 @@ class HeaderButtons extends Component {
 					>
 						<Button>@JNYBGR</Button>
 					</a>
-				</div>
-				{this.state.faq ? <Faq /> : null}
+				</ButtonContainer>
 			</>
 		);
 	}

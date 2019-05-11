@@ -9,11 +9,19 @@ const Container = styled.div`
 	border-bottom: 1px solid black;
 	padding-top: 12px;
 	padding-bottom: 12px;
+	@media screen and (max-width: 800px) {
+		flex-direction: column;
+		padding-left: 30px;
+	}
 `;
 
 const Fact = styled.div`
 	flex: 1;
 	text-align: left;
+	@media screen and (max-width: 800px) {
+		display: flex;
+		flex-direction: row;
+	}
 `;
 
 const Title = styled.div`
@@ -24,6 +32,13 @@ const Title = styled.div`
 const Num = styled.div`
 	font-size: 30px;
 	font-weight: bold;
+	font-family: 'Roboto Condensed';
+	@media screen and (max-width: 800px) {
+		font-size: 14px;
+		&:before {
+			content: ': ';
+		}
+	}
 `;
 
 const getCountries = () =>

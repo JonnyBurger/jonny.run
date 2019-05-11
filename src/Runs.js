@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {FixedSizeList} from 'react-window';
 import {useMedia} from 'react-use-media';
 import Infinite from 'react-infinite-loading';
 import Run, {Header} from './SingleRun';
@@ -57,7 +56,7 @@ const Runs = ({width, height}) => {
 				}}
 				loading={loadingMore}
 			>
-				{data ? data.map(run => <Run run={run} />) : null}
+				{data ? data.map(run => <Run key={run.day} run={run} />) : null}
 			</Infinite>
 		</Container>
 	);
