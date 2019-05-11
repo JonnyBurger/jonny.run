@@ -23,12 +23,6 @@ const Row = styled.div`
 	padding-right: 30px;
 	border-bottom: 1px solid black;
 	align-items: center;
-	justify-content: center;
-	flex: 1;
-
-	@media screen and (max-width: 800px) {
-		display: block;
-	}
 `;
 
 const Day = styled.div`
@@ -134,34 +128,36 @@ export const Header = () => {
 		return null;
 	}
 	return (
-		<Row style={{background: 'white', flex: 0}}>
-			<DateColumn>Date</DateColumn>
-			<Day>Time</Day>
-			<Time>Day</Time>
-			<Distance>Distance</Distance>
-			<City>City</City>
-			<StravaLink>Run</StravaLink>
-			<Treadmill>
-				<Tooltip content="Treadmill">
-					<TreadmillIcon />
-				</Tooltip>
-			</Treadmill>
-			<Injury>
-				<Tooltip content="Injury">
-					<InjuryIcon />
-				</Tooltip>
-			</Injury>
-			<Injury>
-				<Tooltip content="Sickness">
-					<SickIcon />
-				</Tooltip>
-			</Injury>
-			<Drunk>
-				<Tooltip content="Drunk">
-					<DrunkIcon />
-				</Tooltip>
-			</Drunk>
-		</Row>
+		<div>
+			<Row style={{background: 'white', flex: 0}}>
+				<Time>Day</Time>
+				<DateColumn>Date</DateColumn>
+				<Day>Time</Day>
+				<Distance>Distance</Distance>
+				<City>City</City>
+				<StravaLink>Run</StravaLink>
+				<Treadmill>
+					<Tooltip content="Treadmill">
+						<TreadmillIcon />
+					</Tooltip>
+				</Treadmill>
+				<Injury>
+					<Tooltip content="Injury">
+						<InjuryIcon />
+					</Tooltip>
+				</Injury>
+				<Injury>
+					<Tooltip content="Sickness">
+						<SickIcon />
+					</Tooltip>
+				</Injury>
+				<Drunk>
+					<Tooltip content="Drunk">
+						<DrunkIcon />
+					</Tooltip>
+				</Drunk>
+			</Row>
+		</div>
 	);
 };
 
@@ -203,6 +199,7 @@ class SingleRun extends React.Component {
 		const time = this.props.run.date ? getTime(this.props.run) : null;
 		return (
 			<Row>
+				<Time>{this.props.run.day}</Time>
 				<DateColumn>
 					{format(
 						new Date(addDays(new Date('2016-02-18'), this.props.run.day)),
@@ -232,7 +229,6 @@ class SingleRun extends React.Component {
 						</Tooltip>
 					) : null}
 				</Day>
-				<Time>{this.props.run.day}</Time>
 				<Distance>
 					{this.props.run.distance
 						? (this.props.run.distance / 1000).toFixed(1) + 'km'

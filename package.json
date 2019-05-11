@@ -9,6 +9,7 @@
     "ordinal": "^1.0.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-infinite-loading": "^1.0.0",
     "react-simple-tooltip": "^2.5.0",
     "react-sticky": "^6.0.3",
     "react-use-media": "^0.3.0",

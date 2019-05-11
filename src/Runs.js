@@ -2,13 +2,15 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {FixedSizeList} from 'react-window';
 import {useMedia} from 'react-use-media';
-import InfiniteLoader from 'react-window-infinite-loader';
-import Run from './SingleRun';
+import Infinite from 'react-infinite-loading';
+import Run, {Header} from './SingleRun';
 import Facts from './Facts';
 
 const Container = styled.div`
 	max-width: 900px;
 	margin: auto;
+	display: flex;
+	flex-direction: column;
 `;
 
 const getRuns = (offset: number = 0) =>
@@ -20,14 +22,15 @@ const getRuns = (offset: number = 0) =>
 
 const Runs = ({width, height}) => {
 	const [loading, setLoading] = useState(true);
+	const [loadingMore, setLoadingMore] = useState(false);
 	const [data, setData] = useState(null);
 	const [total, setTotal] = useState(null);
 	const isMobile = useMedia('(max-width: 800px)');
 	useEffect(() => {
 		getRuns(0)
 			.then(response => {
-				setLoading(false);
 				setData(response.runs);
+				setLoading(false);
 				setTotal(response.total);
 			})
 			.catch(err => {
@@ -41,40 +44,21 @@ const Runs = ({width, height}) => {
 
 	return (
 		<Container>
-			{/**
-		<Facts total={this.state.total} runs={this.state.data} />
-		 */}
-			<InfiniteLoader
-				itemCount={total}
-				isItemLoaded={index => Boolean(data[index])}
-				loadMoreItems={offset => {
-					return getRuns(offset).then(response => {
+			<Facts total={total} runs={data} />
+			<Header />
+
+			<Infinite
+				handleLoading={() => {
+					setLoadingMore(true);
+					getRuns(data.length).then(response => {
 						setData([...data, ...response.runs]);
+						setLoadingMore(false);
 					});
 				}}
-				minimumBatchSize={100}
-				threshold={40}
+				loading={loadingMore}
 			>
-				{({ref, onItemsRendered}) => (
-					<FixedSizeList
-						overscanCount={40}
-						width={width}
-						height={height}
-						itemCount={total}
-						itemSize={isMobile ? 100 : 50}
-						onItemsRendered={onItemsRendered}
-						ref={ref}
-					>
-						{({index, style}) => (
-							<div
-								style={{...style, display: 'flex', justifyContent: 'center'}}
-							>
-								{data[index] ? <Run run={data[index]} /> : null}
-							</div>
-						)}
-					</FixedSizeList>
-				)}
-			</InfiniteLoader>
+				{data ? data.map(run => <Run run={run} />) : null}
+			</Infinite>
 		</Container>
 	);
 };

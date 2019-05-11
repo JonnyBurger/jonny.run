@@ -108,11 +108,8 @@ class App extends Component {
 					<div style={{height: 20}} />
 					<HeaderButtons />
 				</AppHeader>
-				<Header />
 				<div style={{flex: 1}}>
-					<Autosize>
-						{({height, width}) => <Runs height={height} width={width} />}
-					</Autosize>
+					<Runs />
 				</div>
 			</Container>
 		);

@@ -8,3 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.4;
 }
+
+.infinite {
+  border: 0 !important;
+}
