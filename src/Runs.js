@@ -56,7 +56,11 @@ const Runs = ({width, height}) => {
 				}}
 				loading={loadingMore}
 			>
-				{data ? data.map(run => <Run key={run.day} run={run} />) : null}
+				{data
+					? data.map((run, i) => (
+							<Run isToday={i === 0} key={run.day} run={run} />
+					  ))
+					: null}
 			</Infinite>
 		</Container>
 	);

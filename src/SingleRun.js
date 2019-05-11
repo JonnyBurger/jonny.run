@@ -13,6 +13,8 @@ import infoCircle from './info-circle-regular.svg';
 import Tooltip from './Tooltip';
 import getFlag from './get-flag';
 import {useMedia} from 'react-use-media';
+import {convertToTimeZone} from 'date-fns-timezone';
+import {setHours} from 'date-fns/esm';
 
 const Row = styled.div`
 	display: flex;
@@ -211,9 +213,35 @@ const getTime = run => {
 	);
 };
 
+class TimeRemaining extends React.Component {
+	render() {
+		const dayAfter = addDays(new Date('2016-02-18'), this.props.day + 2);
+		const date = Date.UTC(
+			dayAfter.getFullYear(),
+			dayAfter.getUTCMonth(),
+			dayAfter.getUTCDate(),
+			2 + getTimezoneOffset('Europe/Zurich') / 60
+		);
+		const difference = Math.abs(date - Date.now());
+		const hours = difference / (1000 * 60 * 60);
+		return <span>{Math.round(hours)} hours left to to do so</span>;
+	}
+}
+
 class SingleRun extends React.Component {
 	render() {
 		const time = this.props.run.date ? getTime(this.props.run) : null;
+		if (this.props.isToday && !this.props.run.distance) {
+			return (
+				<Row>
+					<Time>{this.props.run.day}</Time>
+					<div style={{flex: 7, color: 'gray'}}>
+						Did not yet run today... <TimeRemaining day={this.props.run.day} />
+					</div>
+					<div style={{width: 120}} />
+				</Row>
+			);
+		}
 		return (
 			<Row>
 				<Time>{this.props.run.day}</Time>
