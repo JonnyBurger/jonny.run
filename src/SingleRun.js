@@ -13,8 +13,7 @@ import infoCircle from './info-circle-regular.svg';
 import Tooltip from './Tooltip';
 import getFlag from './get-flag';
 import {useMedia} from 'react-use-media';
-import {convertToTimeZone} from 'date-fns-timezone';
-import {setHours} from 'date-fns/esm';
+import Countdown from 'react-countdown-now';
 
 const Row = styled.div`
 	display: flex;
@@ -222,9 +221,19 @@ class TimeRemaining extends React.Component {
 			dayAfter.getUTCDate(),
 			2 + getTimezoneOffset('Europe/Zurich') / 60
 		);
-		const difference = Math.abs(date - Date.now());
-		const hours = difference / (1000 * 60 * 60);
-		return <span>{Math.round(hours)} hours left to to do so</span>;
+		return (
+			<span>
+				<Countdown
+					date={date}
+					renderer={({hours, minutes, seconds}) => (
+						<span>
+							{hours}:{minutes}:{seconds}
+						</span>
+					)}
+				/>{' '}
+				hours left to to do so
+			</span>
+		);
 	}
 }
 
@@ -233,7 +242,7 @@ class SingleRun extends React.Component {
 		const time = this.props.run.date ? getTime(this.props.run) : null;
 		if (this.props.isToday && !this.props.run.distance) {
 			return (
-				<Row>
+				<Row style={{paddingBottom: 15}}>
 					<Time>{this.props.run.day}</Time>
 					<div style={{flex: 7, color: 'gray'}}>
 						Did not yet run today... <TimeRemaining day={this.props.run.day} />
