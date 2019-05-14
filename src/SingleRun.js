@@ -227,7 +227,7 @@ class TimeRemaining extends React.Component {
 					date={date}
 					renderer={({hours, minutes, seconds}) => (
 						<span>
-							{hours}:{minutes}:{seconds}
+							{hours}:{pad(minutes)}:{pad(seconds)}
 						</span>
 					)}
 				/>{' '}
@@ -236,6 +236,11 @@ class TimeRemaining extends React.Component {
 		);
 	}
 }
+
+const pad = num => {
+	if (num < 10) return `0${num}`;
+	return num;
+};
 
 class SingleRun extends React.Component {
 	render() {

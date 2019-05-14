@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {useMedia} from 'react-use-media';
 import Infinite from 'react-infinite-loading';
 import Run, {Header} from './SingleRun';
 import Facts from './Facts';
@@ -24,7 +23,6 @@ const Runs = ({width, height}) => {
 	const [loadingMore, setLoadingMore] = useState(false);
 	const [data, setData] = useState(null);
 	const [total, setTotal] = useState(null);
-	const isMobile = useMedia('(max-width: 800px)');
 	useEffect(() => {
 		getRuns(0)
 			.then(response => {
