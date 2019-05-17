@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import styled from 'styled-components';
 import Tooltip from '@jonny/tooltip';
 import format from 'date-fns/format';
@@ -112,33 +112,45 @@ const Drunk = styled.div`
 	}
 `;
 
-const TreadmillIcon = () => (
+const TreadmillIcon = forwardRef((props, ref) => (
 	<img
 		style={{width: 24, height: 24, marginTop: 8}}
 		src={treadmill}
 		alt="Treadmill"
+		ref={ref}
+		{...props}
 	/>
-);
+));
 
-const InjuryIcon = () => (
+const InjuryIcon = forwardRef((props, ref) => (
 	<img
 		style={{width: 20, height: 20, marginTop: 6}}
 		src={bandaid}
 		alt="Injury"
+		ref={ref}
+		{...props}
 	/>
-);
+));
 
-const SickIcon = () => (
+const SickIcon = forwardRef((props, ref) => (
 	<img
 		style={{width: 20, height: 20, marginTop: 6}}
 		src={thermometer}
 		alt="Sick"
+		ref={ref}
+		{...props}
 	/>
-);
+));
 
-const DrunkIcon = () => (
-	<img style={{width: 16, height: 16, marginTop: 6}} src={drink} alt="Drunk" />
-);
+const DrunkIcon = forwardRef((props, ref) => (
+	<img
+		style={{width: 16, height: 16, marginTop: 6}}
+		src={drink}
+		alt="Drunk"
+		ref={ref}
+		{...props}
+	/>
+));
 
 export const Header = () => {
 	const isMobile = useMedia('(max-width: 800px)');
@@ -242,18 +254,24 @@ const pad = num => {
 	return num;
 };
 
+const YetToRunRow = styled(Row)`
+	@media screen and (max-width: 800px) {
+		padding-bottom: 15px;
+	}
+`;
+
 class SingleRun extends React.Component {
 	render() {
 		const time = this.props.run.date ? getTime(this.props.run) : null;
 		if (this.props.isToday && !this.props.run.distance) {
 			return (
-				<Row style={{paddingBottom: 15}}>
+				<YetToRunRow>
 					<Time>{this.props.run.day}</Time>
 					<div style={{flex: 7, color: 'gray'}}>
 						Did not yet run today... <TimeRemaining day={this.props.run.day} />
 					</div>
 					<div style={{width: 120}} />
-				</Row>
+				</YetToRunRow>
 			);
 		}
 		return (
@@ -314,20 +332,18 @@ class SingleRun extends React.Component {
 				</City>
 				<StravaLink>
 					{this.props.run.strava_id ? (
-						<Tooltip
-							tip={
-								<div style={{width: 110, textAlign: 'center'}}>
-									See Run on Strava
-								</div>
-							}
-							preferredPlacement="top"
+						<a
+							target="_blank"
+							rel="noopener noreferrer"
+							href={`https://strava.com/activities/${this.props.run.strava_id}`}
 						>
-							<a
-								target="_blank"
-								rel="noopener noreferrer"
-								href={`https://strava.com/activities/${
-									this.props.run.strava_id
-								}`}
+							<Tooltip
+								tip={
+									<div style={{width: 110, textAlign: 'center'}}>
+										See Run on Strava
+									</div>
+								}
+								preferredPlacement="top"
 							>
 								<img
 									style={{
@@ -338,8 +354,8 @@ class SingleRun extends React.Component {
 									src={StravaIcon}
 									alt="Strava activity"
 								/>
-							</a>
-						</Tooltip>
+							</Tooltip>
+						</a>
 					) : null}
 				</StravaLink>
 				<Treadmill>
@@ -391,8 +407,8 @@ class SingleRun extends React.Component {
 					{this.props.run.drunk ? (
 						<Tooltip
 							preferredPlacement="top"
-							content={
-								<div style={{width: 200}}>
+							tip={
+								<div style={{width: 200, fontWeight: 'normal'}}>
 									<strong>Alcohol Intake:</strong>
 									<br />"{this.props.run.drunk}"
 								</div>
