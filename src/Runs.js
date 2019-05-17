@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Infinite from 'react-infinite-loading';
 import Run, {Header} from './SingleRun';
 import Facts from './Facts';
+import Loader from './Loader';
 
 const Container = styled.div`
 	max-width: 900px;
@@ -36,7 +37,11 @@ const Runs = ({width, height}) => {
 	}, []);
 
 	if (loading) {
-		return 'Loading...';
+		return (
+			<div style={{textAlign: 'center', marginTop: 100, marginBottom: 100}}>
+				<Loader width={16} height={16} />
+			</div>
+		);
 	}
 
 	return (
