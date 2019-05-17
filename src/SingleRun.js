@@ -298,12 +298,15 @@ class SingleRun extends React.Component {
 				<City>
 					{this.props.run.city ? (
 						<>
-							<Tooltip preferredPlacement="left" tip={this.props.run.country}>
+							<Tooltip
+								preferredPlacement="left"
+								tip={this.props.run.country || <></>}
+							>
 								<img
 									src={getFlag(this.props.run.country)}
 									style={{height: 20, marginRight: 5}}
 									alt={this.props.run.country}
-								/>{' '}
+								/>
 							</Tooltip>
 							{this.props.run.city}
 						</>
