@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Tooltip from '@jonny/tooltip';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 import getTimezoneOffset from 'get-timezone-offset';
@@ -10,7 +11,6 @@ import thermometer from './thermometer.svg';
 import drink from './glass-solid.svg';
 import infoCircle from './info-circle-regular.svg';
 // import {LOS_ANGELES, LONDON, SOFIA, LISBOA} from './timezones';
-import Tooltip from './Tooltip';
 import getFlag from './get-flag';
 import {useMedia} from 'react-use-media';
 import Countdown from 'react-countdown-now';
@@ -155,22 +155,22 @@ export const Header = () => {
 				<City>City</City>
 				<StravaLink>Run</StravaLink>
 				<Treadmill>
-					<Tooltip content="Treadmill">
+					<Tooltip preferredPlacement="bottom" tip="Treadmill">
 						<TreadmillIcon />
 					</Tooltip>
 				</Treadmill>
 				<Injury>
-					<Tooltip content="Injury">
+					<Tooltip preferredPlacement="bottom" tip="Injury">
 						<InjuryIcon />
 					</Tooltip>
 				</Injury>
 				<Injury>
-					<Tooltip content="Sickness">
+					<Tooltip preferredPlacement="bottom" tip="Sickness">
 						<SickIcon />
 					</Tooltip>
 				</Injury>
 				<Drunk>
-					<Tooltip content="Drunk">
+					<Tooltip preferredPlacement="bottom" tip="Drunk">
 						<DrunkIcon />
 					</Tooltip>
 				</Drunk>
@@ -273,7 +273,8 @@ class SingleRun extends React.Component {
 					time.getHours() >= 0 &&
 					time.getHours() < 2 ? (
 						<Tooltip
-							content={
+							preferredPlacement="top"
+							tip={
 								<div style={{width: 150}}>
 									<strong>Run after midnight</strong>
 									<br /> According to my rules every day starts and ends at 2am.
@@ -297,7 +298,7 @@ class SingleRun extends React.Component {
 				<City>
 					{this.props.run.city ? (
 						<>
-							<Tooltip content={this.props.run.country}>
+							<Tooltip preferredPlacement="left" tip={this.props.run.country}>
 								<img
 									src={getFlag(this.props.run.country)}
 									style={{height: 20, marginRight: 5}}
@@ -311,12 +312,12 @@ class SingleRun extends React.Component {
 				<StravaLink>
 					{this.props.run.strava_id ? (
 						<Tooltip
-							content={
+							tip={
 								<div style={{width: 110, textAlign: 'center'}}>
 									See Run on Strava
 								</div>
 							}
-							placement="top"
+							preferredPlacement="top"
 						>
 							<a
 								target="_blank"
@@ -341,7 +342,8 @@ class SingleRun extends React.Component {
 				<Treadmill>
 					{this.props.run.treadmill ? (
 						<Tooltip
-							content={
+							preferredPlacement="top"
+							tip={
 								<div style={{whiteSpace: 'nowrap'}}>
 									{this.props.run.treadmill}
 								</div>
@@ -354,7 +356,8 @@ class SingleRun extends React.Component {
 				<Injury>
 					{this.props.run.injured ? (
 						<Tooltip
-							content={
+							preferredPlacement="top"
+							tip={
 								<div style={{width: 200}}>
 									<strong>Injury:</strong>
 									<br />
@@ -369,7 +372,8 @@ class SingleRun extends React.Component {
 				<Injury>
 					{this.props.run.sick ? (
 						<Tooltip
-							content={
+							preferredPlacement="top"
+							tip={
 								<div style={{width: 200}}>
 									<strong>Sickness:</strong>
 									<br />"{this.props.run.sick}"
@@ -383,6 +387,7 @@ class SingleRun extends React.Component {
 				<Drunk>
 					{this.props.run.drunk ? (
 						<Tooltip
+							preferredPlacement="top"
 							content={
 								<div style={{width: 200}}>
 									<strong>Alcohol Intake:</strong>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@jonny/tooltip": "^1.0.0-alpha.21",
     "date-fns": "^2.0.0-alpha.27",
     "get-timezone-offset": "^1.0.3",
     "lodash.uniqby": "^4.7.0",
@@ -11,7 +12,6 @@
     "react-countdown-now": "^2.1.0",
     "react-dom": "^16.8.3",
     "react-infinite-loading": "^1.0.0",
-    "react-simple-tooltip": "^2.5.0",
     "react-sticky": "^6.0.3",
     "react-use-media": "^0.3.0",
     "react-window": "^1.8.1",
