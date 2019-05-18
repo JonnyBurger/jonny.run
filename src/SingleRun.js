@@ -167,22 +167,46 @@ export const Header = () => {
 				<City>City</City>
 				<StravaLink>Run</StravaLink>
 				<Treadmill>
-					<Tooltip preferredPlacement="bottom" tip="Treadmill">
+					<Tooltip
+						preferredPlacement="bottom"
+						tip="Treadmill"
+						style={{
+							fontFamily: 'Arial, Helvetica'
+						}}
+					>
 						<TreadmillIcon />
 					</Tooltip>
 				</Treadmill>
 				<Injury>
-					<Tooltip preferredPlacement="bottom" tip="Injury">
+					<Tooltip
+						preferredPlacement="bottom"
+						tip="Injury"
+						style={{
+							fontFamily: 'Arial, Helvetica'
+						}}
+					>
 						<InjuryIcon />
 					</Tooltip>
 				</Injury>
 				<Injury>
-					<Tooltip preferredPlacement="bottom" tip="Sickness">
+					<Tooltip
+						preferredPlacement="bottom"
+						tip="Sickness"
+						style={{
+							fontFamily: 'Arial, Helvetica'
+						}}
+					>
 						<SickIcon />
 					</Tooltip>
 				</Injury>
 				<Drunk>
-					<Tooltip preferredPlacement="bottom" tip="Drunk">
+					<Tooltip
+						preferredPlacement="bottom"
+						tip="Drunk"
+						style={{
+							fontFamily: 'Arial, Helvetica'
+						}}
+					>
 						<DrunkIcon />
 					</Tooltip>
 				</Drunk>
@@ -298,6 +322,9 @@ class SingleRun extends React.Component {
 									<br /> According to my rules every day starts and ends at 2am.
 								</div>
 							}
+							style={{
+								fontFamily: 'Arial, Helvetica'
+							}}
 						>
 							<img
 								src={infoCircle}
@@ -319,6 +346,9 @@ class SingleRun extends React.Component {
 							<Tooltip
 								preferredPlacement="left"
 								tip={this.props.run.country || <></>}
+								style={{
+									fontFamily: 'Arial, Helvetica'
+								}}
 							>
 								<img
 									src={getFlag(this.props.run.country)}
@@ -338,12 +368,11 @@ class SingleRun extends React.Component {
 							href={`https://strava.com/activities/${this.props.run.strava_id}`}
 						>
 							<Tooltip
-								tip={
-									<div style={{width: 110, textAlign: 'center'}}>
-										See Run on Strava
-									</div>
-								}
+								tip="See Run on Strava"
 								preferredPlacement="top"
+								style={{
+									fontFamily: 'Arial, Helvetica'
+								}}
 							>
 								<img
 									style={{
@@ -362,6 +391,9 @@ class SingleRun extends React.Component {
 					{this.props.run.treadmill ? (
 						<Tooltip
 							preferredPlacement="top"
+							style={{
+								fontFamily: 'Arial, Helvetica'
+							}}
 							tip={
 								<div style={{whiteSpace: 'nowrap'}}>
 									{this.props.run.treadmill}
@@ -376,6 +408,9 @@ class SingleRun extends React.Component {
 					{this.props.run.injured ? (
 						<Tooltip
 							preferredPlacement="top"
+							style={{
+								fontFamily: 'Arial, Helvetica'
+							}}
 							tip={
 								<div style={{width: 200}}>
 									<strong>Injury:</strong>
@@ -392,6 +427,9 @@ class SingleRun extends React.Component {
 					{this.props.run.sick ? (
 						<Tooltip
 							preferredPlacement="top"
+							style={{
+								fontFamily: 'Arial, Helvetica'
+							}}
 							tip={
 								<div style={{width: 200}}>
 									<strong>Sickness:</strong>
@@ -407,6 +445,9 @@ class SingleRun extends React.Component {
 					{this.props.run.drunk ? (
 						<Tooltip
 							preferredPlacement="top"
+							style={{
+								fontFamily: 'Arial, Helvetica'
+							}}
 							tip={
 								<div style={{width: 200, fontWeight: 'normal'}}>
 									<strong>Alcohol Intake:</strong>

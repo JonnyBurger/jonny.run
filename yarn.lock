@@ -876,19 +876,26 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.3.tgz#6310a047f12d21a1036fb031317219892440416f"
   integrity sha512-4zAPlpDEh2VwXswwr/t8xGNDGg8RQiPxtxZ3qQEXyQsBV39ptTdESCjuBvGze1nLMVrxmTIKmnO/nAV8Tqjjzg==
 
-"@jonny/base-ui@^1.0.0-alpha.21":
-  version "1.0.0-alpha.21"
-  resolved "https://registry.yarnpkg.com/@jonny/base-ui/-/base-ui-1.0.0-alpha.21.tgz#39d4a48a0e5b4f83eb9d431c202cb949b3229e15"
-  integrity sha512-T6oDhD5cMAK6cgvj8cSCTeL8Rd6M8thrn56xx788lvPSx0lhxYkGpd3+yKZlc0J9c1oHGxx49FbBnyBV1YKkDg==
+"@jonny/base-ui@^1.0.0-alpha.23":
+  version "1.0.0-alpha.23"
+  resolved "https://registry.yarnpkg.com/@jonny/base-ui/-/base-ui-1.0.0-alpha.23.tgz#857fceda92cf0353b60e499bc3f87dfd9c1fdd57"
+  integrity sha512-9hkgrsiFGX8TJ0qjo64AWiUQtkwW/ToRjlMTNfl/vUNnJxH870hJl//Eg1W8Yo55i99vSy8KGzbqGYcyb9gxyA==
   dependencies:
     popper.js "^1.15.0"
 
-"@jonny/tooltip@^1.0.0-alpha.21":
-  version "1.0.0-alpha.21"
-  resolved "https://registry.yarnpkg.com/@jonny/tooltip/-/tooltip-1.0.0-alpha.21.tgz#2a5218c8fd1809ce21a4ca2790f0a507ea303208"
-  integrity sha512-MdD7lid3AK7d6NnPksUwh2+ZV+PHl21nv9worIQj0yZMtNntWTRvkNR4LjbNlzRNMzo9Q1WDy51Ka5DguMKY/Q==
+"@jonny/popover@^1.0.0-alpha.23":
+  version "1.0.0-alpha.23"
+  resolved "https://registry.yarnpkg.com/@jonny/popover/-/popover-1.0.0-alpha.23.tgz#a9897e71ccb34835e850a39e062aa0dcb59d363d"
+  integrity sha512-56NHyWWRl5O8jDsromM3e3FEkGgiMNyyrrYn6Nudgb4begP+TXb9jtcfxnoHyyNAWTL/1Z0aQdrdUG5wRIsRhA==
   dependencies:
-    "@jonny/base-ui" "^1.0.0-alpha.21"
+    "@jonny/base-ui" "^1.0.0-alpha.23"
+
+"@jonny/tooltip@^1.0.0-alpha.23":
+  version "1.0.0-alpha.23"
+  resolved "https://registry.yarnpkg.com/@jonny/tooltip/-/tooltip-1.0.0-alpha.23.tgz#f25c9fad94cc0db85be823c1dcb83d8fc8cfed6e"
+  integrity sha512-POH+KZHePiFKXAThBrWnZ6xt4DrxFYqGOwcGMvHDEHJAqX4l7wB91TZoPnM7rbNtc27fErmqef+2ZTBkl3t98A==
+  dependencies:
+    "@jonny/base-ui" "^1.0.0-alpha.23"
     csstype "^2.6.4"
     popper.js "^1.15.0"
     react-popper "^1.3.3"
