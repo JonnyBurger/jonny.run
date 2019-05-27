@@ -24,7 +24,7 @@ export default () => (
 		<p>
 			I felt very un-fit at the beginning of 2016, so I set out to run
 			regularly. After I had accumulated a few days I did not want to break the
-			streak and then I never stopped. Now I cannot stop because if would be
+			streak and then I never stopped. Now I cannot stop because it would be
 			devastating.
 		</p>
 		<h3>
