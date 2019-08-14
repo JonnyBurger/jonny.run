@@ -58,6 +58,7 @@ const Runs = ({width, height}) => {
 					});
 				}}
 				loading={loadingMore}
+				scrollThreshold={100}
 			>
 				{data
 					? data.map((run, i) => (
