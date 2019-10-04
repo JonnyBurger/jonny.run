@@ -77,6 +77,7 @@ const City = styled.div`
 	flex: 2;
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	@media screen and (max-width: 800px) {
 		margin-right: 15px;
 		&:before {
@@ -298,6 +299,9 @@ class SingleRun extends React.Component {
 				</YetToRunRow>
 			);
 		}
+		const countries = this.props.run.country
+			? this.props.run.country.split(',')
+			: [];
 		return (
 			<Row>
 				<Time>{this.props.run.day}</Time>
@@ -343,19 +347,24 @@ class SingleRun extends React.Component {
 				<City>
 					{this.props.run.city ? (
 						<>
-							<Tooltip
-								preferredPlacement="left"
-								tip={this.props.run.country || <></>}
-								style={{
-									fontFamily: 'Arial, Helvetica'
-								}}
-							>
-								<img
-									src={getFlag(this.props.run.country)}
-									style={{height: 20, marginRight: 5}}
-									alt={this.props.run.country}
-								/>
-							</Tooltip>
+							<div style={{display: 'flex'}}>
+								{countries.map(c => (
+									<Tooltip
+										key={c}
+										preferredPlacement="left"
+										tip={c}
+										style={{
+											fontFamily: 'Arial, Helvetica'
+										}}
+									>
+										<img
+											src={getFlag(c)}
+											style={{height: 20, marginRight: 5}}
+											alt={c}
+										/>
+									</Tooltip>
+								))}
+							</div>
 							{this.props.run.city}
 						</>
 					) : null}

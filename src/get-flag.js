@@ -29,4 +29,10 @@ export default country => {
 	if (country === 'Hungary') {
 		return 'https://www.countryflags.io/hu/flat/64.png';
 	}
+	if (country === 'Liechtenstein') {
+		return 'https://www.countryflags.io/li/flat/64.png';
+	}
+	if (country === 'Austria') {
+		return 'https://www.countryflags.io/at/flat/64.png';
+	}
 };
