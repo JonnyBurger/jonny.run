@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Tooltip from '@jonny/tooltip';
 import InfoIcon from './InfoIcon';
+import getFlag from './get-flag';
 
 const Container = styled.div`
 	flex-direction: row;
@@ -113,7 +114,43 @@ export default class extends React.Component {
 					<Num>{((total / 19032) * 100).toFixed(2)}%</Num>
 				</Fact>
 				<Fact>
-					<Title>Countries</Title>
+					<Title>
+						Countries{' '}
+						<Tooltip
+							preferredPlacement="bottom"
+							tip={
+								<div>
+									{this.state.countries
+										? this.state.countries.map(c => (
+												<div
+													key={c}
+													style={{
+														display: 'flex',
+														flexDirection: 'row',
+														alignItems: 'center'
+													}}
+												>
+													<img
+														src={getFlag(c)}
+														style={{height: 20, marginRight: 5}}
+														alt={c}
+													/>
+													{c}
+												</div>
+										  ))
+										: null}
+								</div>
+							}
+							style={{
+								display: this.state.countries ? 'inline-block' : 'none',
+								fontFamily: 'Arial, Helvetica'
+							}}
+						>
+							<span>
+								<InfoIcon style={{height: 14, width: 14, marginTop: -1}} />
+							</span>
+						</Tooltip>
+					</Title>
 					<Num>
 						{this.state.countries ? this.state.countries.length : '...'}
 					</Num>
