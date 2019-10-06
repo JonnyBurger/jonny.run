@@ -142,7 +142,7 @@ export default class extends React.Component {
 								</div>
 							}
 							style={{
-								display: this.state.countries ? 'inline-block' : 'none',
+								display: this.state.countries ? 'inline' : 'none',
 								fontFamily: 'Arial, Helvetica'
 							}}
 						>
