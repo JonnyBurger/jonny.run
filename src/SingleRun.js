@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import styled from "styled-components";
+import { mix } from "polished";
 import Tooltip from "@jonny/tooltip";
 import format from "date-fns/format";
 import addDays from "date-fns/addDays";
@@ -502,7 +503,17 @@ class SingleRun extends React.Component {
                 </div>
               }
             >
-              <span>{this.props.run.weather.temperature.toFixed(1)}°C</span>
+              <span
+                style={{
+                  color: mix(
+                    Math.min(1, (this.props.run.weather.temperature + 5) / 35),
+                    "#e74c3c",
+                    "#3498db"
+                  )
+                }}
+              >
+                {this.props.run.weather.temperature.toFixed(1)}°C
+              </span>
             </Tooltip>
           ) : null}
         </Weather>
