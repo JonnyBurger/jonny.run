@@ -87,6 +87,15 @@ const City = styled.div`
     }
   }
 `;
+
+const Weather = styled.div`
+  flex: 1.5;
+  @media screen and (max-width: 800px) {
+    display: inline-block;
+    margin-right: 15px;
+  }
+`;
+
 const StravaLink = styled.div`
   flex: 1;
   @media screen and (max-width: 800px) {
@@ -195,6 +204,7 @@ export const Header = () => {
         <Day>Time</Day>
         <Distance>Distance</Distance>
         <City>City</City>
+        <Weather>Weather</Weather>
         <StravaLink>Run</StravaLink>
         <Treadmill>
           <Tooltip
@@ -262,6 +272,76 @@ const getTime = run => {
       getTimezoneOffset("Europe/Zurich", new Date(run.date)) * 1000 * 60
   );
 };
+
+const renderCondition = condition => {
+  if (condition === "day-sunny") {
+    return "Sunny";
+  }
+  if (condition === "day-cloudy") {
+    return "Cloudy";
+  }
+  if (condition === "cloudy") {
+    return "Cloudy";
+  }
+  if (condition === "fog") {
+    return "Foggy";
+  }
+  if (condition === "rain") {
+    return "Rainy";
+  }
+  if (condition === "sleet") {
+    return "Snowrain";
+  }
+  if (condition === "snow") {
+    return "Snow";
+  }
+  if (condition === "rain-wind") {
+    return "Rain wind";
+  }
+  if (condition === "showers") {
+    return "Showers";
+  }
+  if (condition === "snow-wind") {
+    return "Snow wind";
+  }
+  if (condition === "lighting") {
+    return "Lightning";
+  }
+  if (condition === "hail") {
+    return "Hail";
+  }
+  if (condition === "thunderstorm") {
+    return "Thunderstorm";
+  }
+  if (condition === "strong-wind") {
+    return "Very windy";
+  }
+  return "Unknown";
+};
+
+const getDistanceFromLatLonInKm = (
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+) => {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) *
+      Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  return d;
+};
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
 
 class TimeRemaining extends React.Component {
   render() {
@@ -383,6 +463,49 @@ class SingleRun extends React.Component {
             </>
           ) : null}
         </City>
+
+        <Weather>
+          {this.props.run.weather ? (
+            <Tooltip
+              preferredPlacement="top"
+              tip={
+                <div style={{ fontWeight: 300 }}>
+                  Condition: {renderCondition(this.props.run.weather.condition)}{" "}
+                  <br />
+                  Pressure: {this.props.run.weather.pressure} hPa <br />{" "}
+                  Windspeed: {this.props.run.weather.windspeed} km/h <br />
+                  {this.props.run.weather.station_location ? (
+                    <span>
+                      (Measured at{" "}
+                      {format(
+                        new Date(
+                          new Date(this.props.run.weather.time).getTime() +
+                            getTimezoneOffset(
+                              "Europe/Zurich",
+                              new Date(this.props.run.weather.time)
+                            ) *
+                              1000 *
+                              60
+                        ),
+                        "dd.MM.yyyy HH:mm"
+                      )}{" "}
+                      at a station which <br /> was{" "}
+                      {getDistanceFromLatLonInKm(
+                        this.props.run.weather.station_location[0],
+                        this.props.run.weather.station_location[1],
+                        this.props.run.location[0],
+                        this.props.run.location[1]
+                      ).toFixed(1)}
+                      km away from the run start distance)
+                    </span>
+                  ) : null}
+                </div>
+              }
+            >
+              <span>{this.props.run.weather.temperature.toFixed(1)}°C</span>
+            </Tooltip>
+          ) : null}
+        </Weather>
         <StravaLink>
           {this.props.run.strava_id ? (
             <a
