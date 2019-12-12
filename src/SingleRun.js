@@ -274,6 +274,52 @@ const getTime = run => {
   );
 };
 
+const renderConditionEmoji = condition => {
+  if (condition === "day-sunny") {
+    return "☀️";
+  }
+  if (condition === "day-cloudy") {
+    return "⛅️";
+  }
+  if (condition === "cloudy") {
+    return "☁️";
+  }
+  if (condition === "fog") {
+    return "🌫";
+  }
+  if (condition === "rain") {
+    return "🌦";
+  }
+  if (condition === "sleet") {
+    return "🌨";
+  }
+  if (condition === "snow") {
+    return "❄️";
+  }
+  if (condition === "rain-wind") {
+    return "💧💨";
+  }
+  if (condition === "showers") {
+    return "🌧";
+  }
+  if (condition === "snow-wind") {
+    return "❄️💨";
+  }
+  if (condition === "lighting") {
+    return "🌩";
+  }
+  if (condition === "hail") {
+    return "🧊";
+  }
+  if (condition === "thunderstorm") {
+    return "⛈";
+  }
+  if (condition === "strong-wind") {
+    return "🌪";
+  }
+  return "";
+};
+
 const renderCondition = condition => {
   if (condition === "day-sunny") {
     return "Sunny";
@@ -471,8 +517,9 @@ class SingleRun extends React.Component {
               preferredPlacement="top"
               tip={
                 <div style={{ fontWeight: 300 }}>
-                  Condition: {renderCondition(this.props.run.weather.condition)}{" "}
-                  <br />
+                  Condition:{" "}
+                  {renderConditionEmoji(this.props.run.weather.condition)}{" "}
+                  {renderCondition(this.props.run.weather.condition)} <br />
                   Pressure: {this.props.run.weather.pressure} hPa <br />{" "}
                   Windspeed: {this.props.run.weather.windspeed} km/h <br />
                   {this.props.run.weather.station_location ? (
@@ -512,6 +559,7 @@ class SingleRun extends React.Component {
                   )
                 }}
               >
+                {renderConditionEmoji(this.props.run.weather.condition)}{" "}
                 {this.props.run.weather.temperature.toFixed(1)}°C
               </span>
             </Tooltip>
