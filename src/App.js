@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import ordinal from "ordinal";
 import Runs from "./Runs";
 import Faq from "./Faq";
-import getDay from "./get-day";
 
 const Container = styled.div`
   display: flex;
