@@ -212,7 +212,7 @@ export const Header = () => {
             preferredPlacement="bottom"
             tip="Treadmill"
             style={{
-              fontFamily: "Arial, Helvetica"
+              fontFamily: "Arial, Helvetica",
             }}
           >
             <TreadmillIcon />
@@ -223,7 +223,7 @@ export const Header = () => {
             preferredPlacement="bottom"
             tip="Injury"
             style={{
-              fontFamily: "Arial, Helvetica"
+              fontFamily: "Arial, Helvetica",
             }}
           >
             <InjuryIcon />
@@ -234,7 +234,7 @@ export const Header = () => {
             preferredPlacement="bottom"
             tip="Sickness"
             style={{
-              fontFamily: "Arial, Helvetica"
+              fontFamily: "Arial, Helvetica",
             }}
           >
             <SickIcon />
@@ -245,7 +245,7 @@ export const Header = () => {
             preferredPlacement="bottom"
             tip="Drunk"
             style={{
-              fontFamily: "Arial, Helvetica"
+              fontFamily: "Arial, Helvetica",
             }}
           >
             <DrunkIcon />
@@ -256,7 +256,7 @@ export const Header = () => {
             preferredPlacement="bottom"
             tip="Video"
             style={{
-              fontFamily: "Arial, Helvetica"
+              fontFamily: "Arial, Helvetica",
             }}
           >
             <CameraIcon />
@@ -267,14 +267,14 @@ export const Header = () => {
   );
 };
 
-const getTime = run => {
+const getTime = (run) => {
   return new Date(
     new Date(run.date).getTime() +
       getTimezoneOffset("Europe/Zurich", new Date(run.date)) * 1000 * 60
   );
 };
 
-const renderConditionEmoji = condition => {
+const renderConditionEmoji = (condition) => {
   if (condition === "day-sunny") {
     return "☀️";
   }
@@ -320,7 +320,7 @@ const renderConditionEmoji = condition => {
   return "";
 };
 
-const renderCondition = condition => {
+const renderCondition = (condition) => {
   if (condition === "day-sunny") {
     return "Sunny";
   }
@@ -415,7 +415,7 @@ class TimeRemaining extends React.Component {
   }
 }
 
-const pad = num => {
+const pad = (num) => {
   if (num < 10) return `0${num}`;
   return num;
 };
@@ -468,7 +468,7 @@ class SingleRun extends React.Component {
                 </div>
               }
               style={{
-                fontFamily: "Arial, Helvetica"
+                fontFamily: "Arial, Helvetica",
               }}
             >
               <img
@@ -486,16 +486,17 @@ class SingleRun extends React.Component {
             : "?"}
         </Distance>
         <City>
+          {this.props.run.day === 1763 ? <div>In my room</div> : null}
           {this.props.run.city ? (
             <>
               <div style={{ display: "flex" }}>
-                {countries.map(c => (
+                {countries.map((c) => (
                   <Tooltip
                     key={c}
                     preferredPlacement="left"
                     tip={c}
                     style={{
-                      fontFamily: "Arial, Helvetica"
+                      fontFamily: "Arial, Helvetica",
                     }}
                   >
                     <img
@@ -556,7 +557,7 @@ class SingleRun extends React.Component {
                     Math.min(1, (this.props.run.weather.temperature + 5) / 35),
                     "#e74c3c",
                     "#3498db"
-                  )
+                  ),
                 }}
               >
                 {renderConditionEmoji(this.props.run.weather.condition)}{" "}
@@ -576,14 +577,14 @@ class SingleRun extends React.Component {
                 tip="See Run on Strava"
                 preferredPlacement="top"
                 style={{
-                  fontFamily: "Arial, Helvetica"
+                  fontFamily: "Arial, Helvetica",
                 }}
               >
                 <img
                   style={{
                     height: 24,
                     width: 24,
-                    marginTop: 3
+                    marginTop: 3,
                   }}
                   src={StravaIcon}
                   alt="Strava activity"
@@ -597,7 +598,7 @@ class SingleRun extends React.Component {
             <Tooltip
               preferredPlacement="top"
               style={{
-                fontFamily: "Arial, Helvetica"
+                fontFamily: "Arial, Helvetica",
               }}
               tip={
                 <div style={{ whiteSpace: "nowrap" }}>
@@ -614,7 +615,7 @@ class SingleRun extends React.Component {
             <Tooltip
               preferredPlacement="top"
               style={{
-                fontFamily: "Arial, Helvetica"
+                fontFamily: "Arial, Helvetica",
               }}
               tip={
                 <div style={{ width: 200 }}>
@@ -633,7 +634,7 @@ class SingleRun extends React.Component {
             <Tooltip
               preferredPlacement="top"
               style={{
-                fontFamily: "Arial, Helvetica"
+                fontFamily: "Arial, Helvetica",
               }}
               tip={
                 <div style={{ width: 200 }}>
@@ -651,7 +652,7 @@ class SingleRun extends React.Component {
             <Tooltip
               preferredPlacement="top"
               style={{
-                fontFamily: "Arial, Helvetica"
+                fontFamily: "Arial, Helvetica",
               }}
               tip={
                 <div style={{ width: 200, fontWeight: "normal" }}>
@@ -669,14 +670,14 @@ class SingleRun extends React.Component {
             <Tooltip
               preferredPlacement="top"
               style={{
-                fontFamily: "Arial, Helvetica"
+                fontFamily: "Arial, Helvetica",
               }}
               tip={
                 <div
                   style={{
                     width: 100,
                     fontWeight: "normal",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   Video

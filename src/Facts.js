@@ -73,7 +73,7 @@ export default class extends React.Component {
     });
   }
   render() {
-    const { total, runs } = this.props;
+    const { total } = this.props;
     return (
       <Container>
         <Fact>
@@ -82,7 +82,7 @@ export default class extends React.Component {
         </Fact>
         <Fact>
           <Title>Did run today yet</Title>
-          <Num>{runs[0].distance ? "Yes" : "No"}</Num>
+          <Num>No</Num>
         </Fact>
         <Fact>
           <Title>

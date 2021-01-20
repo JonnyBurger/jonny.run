@@ -50,6 +50,16 @@ const Button = styled.div`
   text-decoration: none;
 `;
 
+const TheEnd = styled.div`
+  background-color: black;
+  color: white;
+  padding: 20px;
+  max-width: 880px;
+  a {
+    color: white;
+  }
+`;
+
 const ButtonContainer = styled.div`
   flex-direction: row;
   display: flex;
@@ -109,11 +119,25 @@ class App extends Component {
       <Container>
         <AppHeader>
           <Title>RAN EVERY DAY</Title>
-          <div style={{ width: 40 }} />
           <Counter>19.2.2016 - 16.12.2020</Counter>
           <div style={{ flex: 1 }} />
           <div style={{ height: 20 }} />
           <HeaderButtons />
+          <div style={{ height: 20 }} />
+          <div style={{ maxWidth: 900 }}>
+            <TheEnd>
+              My Run Every Day challenge ended after 1763 days on December 16th,
+              2020, after I got Corona. This was the best thing I ever did and I
+              have no regrets.{" "}
+              <a
+                href="https://twitter.com/JNYBGR/status/1339993707957903364"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Watch my farewell video!
+              </a>
+            </TheEnd>
+          </div>
         </AppHeader>
         <div style={{ flex: 1 }}>
           <Runs />
